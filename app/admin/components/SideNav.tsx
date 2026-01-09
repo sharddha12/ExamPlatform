@@ -4,11 +4,11 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 const navItems = [
-  { name: 'Dashboard', href: '/admin/dashboard', icon: '🏠' },
-  { name: 'Students', href: '/admin/students', icon: '👨‍🎓' },
-  { name: 'Questions', href: '/admin/addquestion', icon: '❓' },
-  { name: 'Results', href: '/admin/view-results', icon: '📊' },
-    { name: 'Question list', href: '/admin/question', icon: '📊' },
+  { name: 'Dashboard', href: '/admin/dashboard', icon: '' },
+  { name: 'Students', href: '/admin/students', icon: '' },
+  { name: 'Questions', href: '/admin/addquestion', icon: '' },
+  { name: 'Results', href: '/admin/view-results', icon: '' },
+    { name: 'Question list', href: '/admin/question', icon: '' },
 
 ];
 

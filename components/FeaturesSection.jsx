@@ -1,76 +1,48 @@
-'use client'
-import { motion } from 'framer-motion'
-import { Lock, Clock, TrendingUp, Users, Smartphone, Settings } from 'lucide-react'
+'use client';
 
-export default function FeaturesSection() {
-  const features = [
-    {
-      title: 'Secure & Reliable',
-      desc: 'Advanced security measures ensure exam integrity with encrypted data transmission and secure user authentication.',
-      icon: <Lock className="w-8 h-8 text-white" />,
-      bg: 'bg-gradient-to-r from-purple-500 to-indigo-500',
-    },
-    {
-      title: 'Real-time Monitoring',
-      desc: 'Live exam monitoring with automatic time tracking, progress indicators, and instant submission capabilities.',
-      icon: <Clock className="w-8 h-8 text-white" />,
-      bg: 'bg-gradient-to-r from-purple-500 to-indigo-500',
-    },
-    {
-      title: 'Instant Results',
-      desc: 'Get immediate feedback with automated grading, detailed analytics, and comprehensive performance reports.',
-      icon: <TrendingUp className="w-8 h-8 text-white" />,
-      bg: 'bg-gradient-to-r from-purple-500 to-indigo-500',
-    },
-    {
-      title: 'Multi-User Support',
-      desc: 'Separate dashboards for students and staff with role-based access control and personalized experiences.',
-      icon: <Users className="w-8 h-8 text-white" />,
-      bg: 'bg-gradient-to-r from-purple-500 to-indigo-500',
-    },
-    {
-      title: 'Mobile Friendly',
-      desc: 'Responsive design ensures seamless exam experience across all devices - desktop, tablet, and mobile.',
-      icon: <Smartphone className="w-8 h-8 text-white" />,
-      bg: 'bg-gradient-to-r from-purple-500 to-indigo-500',
-    },
-    {
-      title: 'Easy Management',
-      desc: 'Intuitive admin panel for creating exams, managing questions, and analyzing student performance effortlessly.',
-      icon: <Settings className="w-8 h-8 text-white" />,
-      bg: 'bg-gradient-to-r from-purple-500 to-indigo-500',
-    },
-  ]
+import { motion } from 'framer-motion';
 
+export default function CallToAction() {
   return (
-    <section className="py-32 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-      <h2 className="text-4xl sm:text-5xl font-bold text-center mb-6 sm:mb-10">Why Choose Our Platform?</h2>
-      <p className="text-gray-600 text-center text-lg sm:text-xl mb-16 max-w-2xl mx-auto">
-        Discover the powerful features that make online examinations seamless and secure
-      </p>
+    <section className="py-8 sm:py-12 lg:py-10 bg-gradient-to-b from-blue-600 via-blue-700 to-blue-900 text-center">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        className="max-w-3xl mx-auto px-4 sm:px-6"
+      >
+        {/* Heading */}
+        <motion.h2
+          initial={{ y: -5 }}
+          animate={{ y: 0 }}
+          transition={{ duration: 1.2 }}
+          className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-white to-cyan-200 mb-3 leading-tight"
+        >
+          Ready to Transform Your Examination Experience?
+        </motion.h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 sm:gap-16">
-        {features.map((feature, idx) => (
-          <motion.div
-            key={idx}
-            className="p-10 sm:p-12 bg-white rounded-3xl shadow-md border hover:shadow-2xl transition transform hover:-translate-y-2 hover:scale-105"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: idx * 0.15, type: 'spring', stiffness: 100 }}
+        {/* Subtext */}
+        <p className="text-base sm:text-lg md:text-xl text-white/80 mb-6 leading-relaxed font-medium">
+          Join thousands of students and educators who trust our platform for secure, smooth, and efficient online examinations.
+        </p>
+
+        {/* Buttons */}
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
+          <a
+            href="/signup"
+            className="inline-flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-3 bg-white text-blue-700 font-bold text-base sm:text-lg rounded-full shadow-md hover:shadow-xl hover:scale-105 transition transform duration-300"
           >
-            {/* Icon */}
-            <div className={`w-20 h-20 mb-6 mx-auto flex items-center justify-center rounded-full ${feature.bg}`}>
-              {feature.icon}
-            </div>
+            Sign Up Now
+          </a>
 
-            {/* Title */}
-            <h3 className="text-2xl font-semibold text-center mb-4">{feature.title}</h3>
-
-            {/* Description */}
-            <p className="text-gray-600 text-center text-base sm:text-lg leading-relaxed">{feature.desc}</p>
-          </motion.div>
-        ))}
-      </div>
+          <a
+            href="/signin"
+            className="inline-flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-3 border-2 border-white text-white font-bold text-base sm:text-lg rounded-full hover:bg-white/10 hover:scale-105 transition transform duration-300"
+          >
+            Sign In
+          </a>
+        </div>
+      </motion.div>
     </section>
-  )
+  );
 }

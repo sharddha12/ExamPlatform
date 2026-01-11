@@ -1,34 +1,42 @@
 'use client';
 
+import Image from 'next/image';
+
 export default function AboutUs() {
   return (
-    <section className="py-16 md:py-24 lg:py-32 bg-gradient-to-b from-gray-50 to-blue-50">
-      <div className="max-w-6xl mx-auto px-6 text-center">
-        {/* Title */}
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-12">
-          About Us
-        </h2>
+    <section id="about" className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-blue-50 to-white">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
-        {/* Mission Statement */}
-        <p className="text-lg md:text-xl lg:text-2xl text-gray-700 max-w-4xl mx-auto mb-16 leading-relaxed">
-          Our mission is to revolutionize online assessments by providing a platform that is both powerful and easy to use. We bring together educators and students in a secure, real-time environment.
-        </p>
+          {/* Left Side - Image */}
+          <div className="relative w-full h-80 sm:h-96 md:h-[500px] rounded-3xl overflow-hidden shadow-2xl">
+            <Image
+              src="/close.jpg"
+              alt="About Us"
+              fill
+              className="object-cover"
+            />
+          </div>
 
-        {/* Two Columns */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto text-left">
-          {/* Left Column */}
+          {/* Right Side - Content */}
           <div className="space-y-6">
-            <p className="text-base md:text-lg text-gray-700 leading-relaxed">
-              Founded in 2026, Online Examination System has been at the forefront of e-assessment technology. With innovations in proctoring, instant analytics, and mobile compatibility, we have served thousands of institutions across the globe.
+            <h2 className="text-4xl sm:text-5xl font-extrabold text-gray-900">
+              About Us
+            </h2>
+
+            <p className="text-lg sm:text-xl text-gray-700 leading-relaxed text-justify">
+              We are transforming online learning in Nepal with a secure, interactive, and easy-to-use platform that connects students and educators seamlessly.
+            </p>
+
+            <p className="text-gray-700 text-base sm:text-lg leading-relaxed text-justify">
+              Our platform provides innovative e-assessment solutions that empower students and educators to achieve their academic goals efficiently. By leveraging modern technology, we ensure a smooth, reliable, and secure online learning experience.
+            </p>
+
+            <p className="text-gray-700 text-base sm:text-lg leading-relaxed text-justify">
+              Since 2026, we have supported thousands of students across Nepal, helping them excel in examinations and build confidence in their learning journey. Our mission is to continuously innovate and provide tools that enhance both teaching and learning outcomes.
             </p>
           </div>
 
-          {/* Right Column */}
-          <div className="space-y-6">
-            <p className="text-base md:text-lg text-gray-700 leading-relaxed">
-              Our core values—security, reliability, and user-centric design—drive every feature we build. From seamless integration with existing databases to customizable exam workflows, we work closely with educational institutions to tailor the experience to their exact needs.
-            </p>
-          </div>
         </div>
       </div>
     </section>

@@ -5,7 +5,7 @@ import { ArrowRight } from 'lucide-react';
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-r from-indigo-700 via-purple-600 to-pink-500 overflow-hidden">
+    <section id ="home" className="relative min-h-screen flex items-center justify-center bg-gradient-to-r from-indigo-700 via-purple-600 to-pink-500 overflow-hidden">
       
       {/* Floating Geometric Shapes */}
       <div className="absolute top-10 left-10 w-28 h-28 bg-pink-400 rounded-full opacity-40 animate-pulse blur-3xl"></div>
@@ -75,7 +75,7 @@ export default function HeroSection() {
             "
           >
             <img
-              src="/code.jpg"
+              src="/space.jpg"
               alt="Online Exam Platform"
               className="w-full h-full object-cover"
             />

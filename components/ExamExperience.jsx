@@ -4,43 +4,63 @@ import { motion } from 'framer-motion';
 
 export default function CallToAction() {
   return (
-    <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-blue-600 via-blue-700 to-blue-900 text-center">
+    <section className="py-12 px-4">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        className="max-w-3xl mx-auto px-4 sm:px-6"
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: 'easeOut' }}
+        className="max-w-7xl mx-auto"
       >
-        {/* Heading */}
-        <motion.h2
-          initial={{ y: -5 }}
-          animate={{ y: 0 }}
-          transition={{ duration: 1.2 }}
-          className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-white to-cyan-200 mb-4 leading-tight"
-        >
-          Ready to Transform Your Examination Experience?
-        </motion.h2>
-
-        {/* Subtext */}
-        <p className="text-base sm:text-lg md:text-xl text-white/80 mb-8 leading-relaxed font-medium">
-          Join thousands of students and educators who trust our platform for secure, smooth, and efficient online examinations.
-        </p>
-
-        {/* Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
-          <a
-            href="/signup"
-            className="inline-flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-4 bg-white text-blue-700 font-bold text-base sm:text-lg rounded-full shadow-md hover:shadow-xl hover:scale-105 transition transform duration-300"
+        {/* Outer Border */}
+        <div className="rounded-[3rem] bg-gradient-to-r from-blue-500  to-blue-500 p-[6px]">
+          
+          {/* Inner Container */}
+          <div
+            className="
+              rounded-[2.7rem]
+              bg-gradient-to-r from-blue-500 to-blue-600
+              px-10 py-12
+              sm:px-14 sm:py-16
+              flex flex-col lg:flex-row
+              items-start lg:items-center
+              justify-between
+              gap-10
+            "
           >
-            Sign Up Now
-          </a>
+            {/* Text Content */}
+            <div className="max-w-4xl">
+              <h2 className="text-white text-4xl sm:text-5xl font-extrabold leading-tight mb-5">
+                Ready to upgrade your online assessments?
+              </h2>
 
-          <a
-            href="/signin"
-            className="inline-flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-4 border-2 border-white text-white font-bold text-base sm:text-lg rounded-full hover:bg-white/10 hover:scale-105 transition transform duration-300"
-          >
-            Sign In
-          </a>
+              <p className="text-white/90 text-lg sm:text-xl font-medium leading-relaxed">
+                Arrange a demo and enjoy a 14-day free trial to discover how
+                Synap can streamline your online exams and courses.
+              </p>
+            </div>
+
+            {/* CTA Button */}
+            <div className="flex-shrink-0">
+              <a
+                href="/demo"
+                className="
+                  inline-flex items-center justify-center
+                  bg-pink-50
+                  text-pink-600
+                  font-bold
+                  text-lg
+                  px-10 py-5
+                  rounded-2xl
+                  shadow-lg
+                  hover:shadow-xl
+                  hover:scale-105
+                  transition-all duration-300
+                "
+              >
+                Book a demo
+              </a>
+            </div>
+          </div>
         </div>
       </motion.div>
     </section>

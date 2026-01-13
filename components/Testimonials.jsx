@@ -7,21 +7,21 @@ const testimonials = [
     id: 1,
     name: 'Saru Sapkota',
     position: 'Student',
-    photo: '/user1.jpg', // public folder ma rakhnu
+    photo: 'image5.jpg', // public folder ma rakhnu
     feedback: 'This platform made my entrance exam preparation so much easier and efficient!',
   },
   {
     id: 2,
     name: 'Ram Thapa',
     position: 'CSIT Faculty',
-    photo: '/user2.jpg',
+    photo: 'image5.jpg',
     feedback: 'A modern and intuitive interface. I love how easy it is for students to attempt exams online.',
   },
   {
     id: 3,
     name: 'Mina Sharma',
     position: 'Student',
-    photo: '/user3.jpg',
+    photo: 'image5.jpg',
     feedback: 'Instant results and detailed feedback helped me improve a lot in a short time.',
   },
 ];

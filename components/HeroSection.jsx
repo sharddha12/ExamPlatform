@@ -7,14 +7,14 @@ export default function HeroSection() {
   return (
     <section id ="home" className="relative min-h-screen flex items-center justify-center bg-gradient-to-r from-indigo-700 via-purple-600 to-pink-500 overflow-hidden">
       
-      {/* Floating Geometric Shapes */}
+      
       <div className="absolute top-10 left-10 w-28 h-28 bg-pink-400 rounded-full opacity-40 animate-pulse blur-3xl"></div>
       <div className="absolute bottom-20 right-20 w-36 h-36 bg-blue-400 rounded-full opacity-30 animate-pulse blur-3xl"></div>
       <div className="absolute top-1/2 left-1/2 w-56 h-56 bg-yellow-300 opacity-20 rounded-full blur-2xl -translate-x-1/2 -translate-y-1/2"></div>
 
       <div className="relative max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center justify-between gap-14 z-10">
         
-        {/* Left Side - Text Content */}
+        
         <motion.div
           initial={{ x: -120, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
@@ -53,7 +53,7 @@ export default function HeroSection() {
           </div>
         </motion.div>
 
-        {/* Right Side - EXTRA LARGE IMAGE */}
+        
         <motion.div
           initial={{ y: 80, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -80,7 +80,7 @@ export default function HeroSection() {
               className="w-full h-full object-cover"
             />
 
-            {/* Floating notification */}
+            
             <div className="absolute top-6 right-6 bg-purple-600/90 text-white px-4 py-2 rounded-full text-sm font-semibold animate-bounce shadow-lg">
               New Exam Available
             </div>

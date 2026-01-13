@@ -6,30 +6,30 @@ export default function HowItWorks() {
       number: '1',
       title: 'Register Account',
       description: 'Create your account as a student or staff member with secure credentials and profile information.',
-      img: 'https://img.freepik.com/premium-vector/girl-fills-out-form-concept-woman-logs-website-internet-profile-account-protection-safety-character-with-website-security-system-cartoon-flat-vector-illustration_118813-16210.jpg',
+      img: 'image1.jpg',
     },
     {
       number: '2',
       title: 'Access Dashboard',
       description: 'Login to your personalized dashboard to view available exams, schedules, and important notifications.',
-      img: 'https://thumbs.dreamstime.com/b/flat-cartoon-vector-illustration-girl-sitting-laptop-task-list-test-screen-student-taking-exam-woman-managing-393760730.jpg',
+      img: 'image2.jpg',
     },
     {
       number: '3',
       title: 'Take Examination',
       description: 'Start your exam with confidence using our user-friendly interface and real-time progress tracking.',
-      img: 'https://static.vecteezy.com/system/resources/previews/047/751/207/non_2x/illustration-of-a-girl-student-taking-a-test-on-a-laptop-flat-cartoon-style-online-education-and-study-back-to-school-digital-exam-setting-in-a-school-or-university-remote-learning-vector.jpg',
+      img: 'image3.jpg',
     },
     {
       number: '4',
       title: 'View Results',
       description: 'Get instant results with detailed analysis, performance metrics, and areas for improvement.',
-      img: 'https://thumbs.dreamstime.com/b/man-reviewing-test-results-laptop-assessment-evaluation-vector-design-generative-ai-illustration-checkmarks-393178749.jpg',
+      img: 'image4.jpg ',
     },
   ];
 
   return (
-    <section  id ="how-it-works" className="py-32 bg-gradient-to-b from-white via-indigo-50 to-purple-50 overflow-hidden">
+    <section  id ="how-it-works" className="py-12 bg-gradient-to-b from-white via-indigo-50 to-purple-50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 text-center">
         <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
           How It Works
@@ -44,10 +44,10 @@ export default function HowItWorks() {
               key={step.number}
               className="group relative flex flex-col items-center transform transition-all duration-500 hover:scale-110 hover:z-10"
             >
-              {/* Floating glow behind number */}
+              
               <div className="absolute top-0 -translate-y-1/2 w-32 h-32 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 opacity-20 blur-3xl group-hover:opacity-40 transition-all duration-500"></div>
 
-              {/* Illustration */}
+              
               <div className="mb-10 overflow-hidden rounded-3xl shadow-2xl bg-white p-6 group-hover:shadow-3xl transition-shadow transform group-hover:-translate-y-2 group-hover:scale-105 duration-500">
                 <img
                   src={step.img}
@@ -56,7 +56,7 @@ export default function HowItWorks() {
                 />
               </div>
 
-              {/* Number Circle */}
+              
               <div className="relative w-24 h-24 mb-8">
                 <div className="absolute inset-0 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full blur-xl opacity-60 group-hover:opacity-90 transition duration-500"></div>
                 <div className="relative w-full h-full bg-gradient-to-br from-indigo-600 to-purple-700 rounded-full flex items-center justify-center text-white text-4xl font-extrabold shadow-2xl">
@@ -64,7 +64,7 @@ export default function HowItWorks() {
                 </div>
               </div>
 
-              {/* Title & Description */}
+              
               <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4 group-hover:text-indigo-600 transition-colors duration-500">
                 {step.title}
               </h3>

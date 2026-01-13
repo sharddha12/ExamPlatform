@@ -18,7 +18,6 @@ export default function Navbar() {
         <nav className="hidden md:flex items-center gap-8 text-gray-600 font-medium">
           <a href="#home" className="hover:text-indigo-600 transition">Home</a>
           <a href="#features" className="hover:text-indigo-600 transition">FeaturesSection</a>
-          <a href="#pricing" className="hover:text-indigo-600 transition">Degree</a>
           <a href="#how-it-works" className="hover:text-indigo-600 transition">WorksSection</a>
           <a href="#testimonials" className="hover:text-indigo-600 transition">MocktestResult</a>
           <a href="#about" className="hover:text-indigo-600 transition">AboutUs</a>
@@ -29,7 +28,7 @@ export default function Navbar() {
           
         </nav>
 
-        {/* Take Exam Button (REAL PAGE) */}
+      
         <a
           href="/student/login"
           className="px-6 py-2.5 rounded-full bg-indigo-600 text-white font-semibold hover:bg-indigo-700 transition shadow-md"

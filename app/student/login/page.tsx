@@ -6,14 +6,47 @@ import { Eye, EyeOff, GraduationCap } from 'lucide-react';
 
 export default function StudentLoginPage() {
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const router = useRouter();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // ✅ Temporary frontend-only login
-    // Later: replace with API call
-    router.push('/student/dashboard');
+    try {
+      const res = await fetch('http://localhost/exam-api/login.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!data.success) {
+        alert(data.message);
+        return;
+      }
+
+      // ✅ role check
+      if (data.user.role !== 'student') {
+        alert('You are not a student');
+        return;
+      }
+
+      // ✅ save student data
+      localStorage.setItem('user', JSON.stringify(data.user));
+
+      // ✅ redirect
+      router.push('/student/dashboard');
+
+    } catch (error) {
+      alert('Server error. Please try again.');
+    }
   };
 
   return (
@@ -22,7 +55,7 @@ export default function StudentLoginPage() {
       <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-8">
         
         {/* Header */}
-        <div className="flex flex-col items-center mb-6 reminds:">
+        <div className="flex flex-col items-center mb-6">
           <GraduationCap className="w-10 h-10 text-indigo-600 mb-2" />
           <h1 className="text-2xl font-bold text-gray-800">
             Student Login
@@ -43,6 +76,8 @@ export default function StudentLoginPage() {
             <input
               type="email"
               placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"
               required
             />
@@ -57,6 +92,8 @@ export default function StudentLoginPage() {
               <input
                 type={showPassword ? 'text' : 'password'}
                 placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"
                 required
               />

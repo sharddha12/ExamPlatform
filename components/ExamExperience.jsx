@@ -11,10 +11,7 @@ export default function CallToAction() {
         transition={{ duration: 0.7, ease: 'easeOut' }}
         className="max-w-7xl mx-auto"
       >
-        {/* Outer Border */}
-        <div className="rounded-[3rem] bg-gradient-to-r from-blue-500  to-blue-500 p-[6px]">
-          
-          {/* Inner Container */}
+        <div className="rounded-[3rem] bg-gradient-to-r from-blue-500 to-blue-500 p-[6px]">
           <div
             className="
               rounded-[2.7rem]
@@ -27,22 +24,21 @@ export default function CallToAction() {
               gap-10
             "
           >
-            {/* Text Content */}
             <div className="max-w-4xl">
               <h2 className="text-white text-4xl sm:text-5xl font-extrabold leading-tight mb-5">
-                Ready to upgrade your online assessments?
+                Experience the Future of Online Examinations
               </h2>
 
               <p className="text-white/90 text-lg sm:text-xl font-medium leading-relaxed">
-                Arrange a demo and enjoy a 14-day free trial to discover how
-                Synap can streamline your online exams and courses.
+                Join thousands of educators and students who trust our platform
+                for secure, efficient, and engaging online exams.
               </p>
             </div>
 
-            {/* CTA Button */}
             <div className="flex-shrink-0">
+              {/* Take Exam → Login */}
               <a
-                href="/demo"
+                href="/student/login"
                 className="
                   inline-flex items-center justify-center
                   bg-pink-50
@@ -57,7 +53,7 @@ export default function CallToAction() {
                   transition-all duration-300
                 "
               >
-                Book a demo
+                Take Exam
               </a>
             </div>
           </div>

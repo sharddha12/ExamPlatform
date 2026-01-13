@@ -6,13 +6,47 @@ import { Eye, EyeOff, ShieldCheck } from 'lucide-react';
 
 export default function AdminLoginPage() {
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const router = useRouter();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // ✅ Temporary frontend-only admin login
-    router.push('/admin/dashboard');
+    try {
+      const res = await fetch('http://localhost/exam-api/login.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!data.success) {
+        alert(data.message);
+        return;
+      }
+
+      // role check
+      if (data.user.role !== 'admin') {
+        alert('You are not an admin');
+        return;
+      }
+
+      // save admin
+      localStorage.setItem('user', JSON.stringify(data.user));
+
+      // redirect
+      router.push('/admin/dashboard');
+
+    } catch (error) {
+      alert('Server error. Try again.');
+    }
   };
 
   return (
@@ -42,6 +76,8 @@ export default function AdminLoginPage() {
             <input
               type="email"
               placeholder="admin@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"
               required
             />
@@ -56,6 +92,8 @@ export default function AdminLoginPage() {
               <input
                 type={showPassword ? 'text' : 'password'}
                 placeholder="Enter password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"
                 required
               />

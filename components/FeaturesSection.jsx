@@ -37,8 +37,7 @@ export default function FeaturesSection() {
   ]
 
   return (
-    <section id ="features" className="py-24 bg-gradient-to-b from-white via-indigo-50 to-purple-50">
-        {/* Heading */}
+    <section id ="features" className="py-10 bg-gradient-to-b from-white via-indigo-50 to-purple-50">
              <div className="max-w-7xl mx-auto px-6 text-center">
  
 
@@ -50,7 +49,7 @@ export default function FeaturesSection() {
           Discover the powerful features that make online examinations seamless and secure
         </p>
 
-        {/* Features Grid */}
+      
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 sm:gap-14">
           {features.map((feature, idx) => (
             <motion.div
@@ -61,22 +60,22 @@ export default function FeaturesSection() {
               viewport={{ once: true }}
               transition={{ delay: idx * 0.15, type: 'spring', stiffness: 120 }}
             >
-              {/* Icon with gradient hover */}
+              
               <div className="w-20 h-20 mb-6 flex items-center justify-center rounded-full bg-gray-100 shadow-md group-hover:bg-gradient-to-br group-hover:from-indigo-100 group-hover:via-purple-100 group-hover:to-indigo-200 transition-all duration-300">
                 {feature.icon}
               </div>
 
-              {/* Title */}
+              
               <h3 className="text-2xl sm:text-2xl font-semibold text-gray-800 mb-3 group-hover:text-indigo-600 transition-colors duration-300">
                 {feature.title}
               </h3>
 
-              {/* Description */}
+              
               <p className="text-gray-500 text-base sm:text-lg leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
                 {feature.desc}
               </p>
 
-              {/* Decorative gradient blur circle */}
+              
               <div className="absolute -top-4 -right-4 w-16 h-16 rounded-full bg-gradient-to-br from-indigo-100 to-purple-100 opacity-30 blur-3xl pointer-events-none"></div>
             </motion.div>
           ))}

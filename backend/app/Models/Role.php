@@ -9,4 +9,12 @@ class Role extends Model
 {
     /** @use HasFactory<\Database\Factories\RoleFactory> */
     use HasFactory;
+
+    protected $fillable=['name'];
+    protected $hidden=['created_at','updated_at', 'pivot'];
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

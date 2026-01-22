@@ -7,54 +7,103 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\Role;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
-    public function register(RegisterRequest $request) {
+    /**
+     * Student self registration
+     * Faculty is NOT assigned here
+     */
+    public function register(RegisterRequest $request)
+    {
+        // Only BODY data + only validated keys
+        $data = $request->only(array_keys($request->validated()));
 
-        // Register the user name , email, password
-        $credentials = $request->validated();
-        $deviceName = $request->header('User-Agent', 'Unknown Device');
-        $user = User::create($credentials);
-        // Assign the member role while registering from the normal route
-        $memberRole = Role::where('name', 'student')->first();
-        if ($memberRole) {
-            $user->roles()->attach($memberRole->id);
-        }
-        $user->load('roles');
-        return response()->json([
-            'message' => 'User registered',
-            'access_token' => $user->createToken($deviceName)->plainTextToken,
-            'token_type' => 'Bearer',
-            'user' => $user,
-        ], 201);
+        $user = User::create([
+            'name'      => $data['name'],
+            'email'     => $data['email'],
+            'password'  => $data['password'],
+            'is_active' => 1,
+            'is_admin'  => 0,
+        ]);
 
+        // attach default student role
+        $studentRole = Role::where('name', 'student')->firstOrFail();
+        $user->roles()->attach($studentRole->id);
+
+        // create JWT
+        $token = JWTAuth::fromUser($user);
+
+        return $this->respondWithToken($token, $user);
     }
 
-    public function login(LoginRequest $request) {
-        // Login
-        $credentials = $request->validated();
-        $user = User::where('email', $credentials['email'])->first();
-        if (!$user || !(Hash::check($credentials['password'], $user->password))) {
+    /**
+     * Login
+     */
+    public function login(LoginRequest $request)
+    {
+        // body-only credentials
+        $credentials = $request->only(['email', 'password']);
+
+        if (! $token = JWTAuth::attempt($credentials)) {
             return response()->json([
-                'message' => 'The entered credentials are incorrect',
+                'message' => 'Invalid credentials'
             ], 401);
         }
-        $deviceName = $request->header('User-agent', 'Unknown Device');
-        $user->load('roles');
-        return response()->json([
-            'message' => 'Logged in successfully',
-            'access_token' => $user->createToken($deviceName)->plainTextToken,
-            'token_type' => 'Bearer',
-            'user' => $user,
-        ], 200);
 
+        $user = JWTAuth::user();
 
+        // active check
+        if ((int) $user->is_active !== 1) {
+            JWTAuth::invalidate($token);
+
+            return response()->json([
+                'message' => 'User account is disabled'
+            ], 403);
+        }
+
+        return $this->respondWithToken($token, $user);
     }
 
-    public function logout() {
+    /**
+     * Logout
+     */
+    public function logout()
+    {
+        JWTAuth::invalidate(JWTAuth::getToken());
 
+        return response()->json([
+            'message' => 'Successfully logged out'
+        ]);
+    }
+
+    /**
+     * Get authenticated user
+     */
+    public function me()
+    {
+        $user = JWTAuth::user()->load([
+            'roles',
+            'categories' // your category-user pivot
+        ]);
+
+        return response()->json([
+            'user' => $user
+        ]);
+    }
+
+    /**
+     * Token response
+     */
+    protected function respondWithToken(string $token, User $user)
+    {
+        return response()->json([
+            'access_token' => $token,
+            'token_type'   => 'bearer',
+            'expires_in'   => JWTAuth::factory()->getTTL() . ' minutes',
+            'user'         => $user->load('roles', 'faculties'),
+        ]);
     }
 }

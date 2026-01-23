@@ -26,7 +26,7 @@ const subjects = [
   },
   {
     id: 4,
-    name: 'Mechanical Engineering',
+    name: 'BIT',
     icon: BookOpen,
     bgGradient: 'from-pink-500 to-rose-500',
     studentsCount: 650,

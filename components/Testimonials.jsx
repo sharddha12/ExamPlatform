@@ -7,7 +7,7 @@ const testimonials = [
     id: 1,
     name: 'Saru Sapkota',
     position: 'Student',
-    photo: 'image5.jpg', // public folder ma rakhnu
+    photo: 'image5.jpg',
     feedback: 'This platform made my entrance exam preparation so much easier and efficient!',
   },
   {

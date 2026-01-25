@@ -1,8 +1,8 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { CheckCircle } from 'lucide-react';
 
 export default function ExamAttempt() {
   const { examId } = useParams();
@@ -11,37 +11,47 @@ export default function ExamAttempt() {
   const [questions, setQuestions] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string>>({});
-  const [timeLeft, setTimeLeft] = useState(60 * 60); // 60 minutes
+  const [timeLeft, setTimeLeft] = useState(60 * 60); // 60 minutes example → change as needed
   const [loading, setLoading] = useState(true);
 
   const QUESTIONS_PER_PAGE = 20;
 
+  
   useEffect(() => {
     if (timeLeft <= 0) {
       handleSubmitExam();
       return;
     }
-    const timer = setInterval(() => setTimeLeft((prev) => prev - 1), 1000);
+
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => prev - 1);
+    }, 1000);
+
     return () => clearInterval(timer);
   }, [timeLeft]);
 
+  
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
+
   useEffect(() => {
+    
     const mockQuestions = Array.from({ length: 65 }, (_, i) => ({
       id: i + 1,
-      text: `Question ${i + 1}: This is sample question number ${i + 1}.`,
+      text: `Question ${i + 1}: This is sample question number ${i + 1} from CSV upload. What is the correct answer?`,
       options: [
         `Option A for Q${i + 1}`,
         `Option B for Q${i + 1}`,
         `Option C for Q${i + 1}`,
         `Option D for Q${i + 1}`,
       ],
+      correctAnswer: `Option A for Q${i + 1}`, // just for demo
     }));
+
     setQuestions(mockQuestions);
     setLoading(false);
   }, [examId]);
@@ -51,7 +61,10 @@ export default function ExamAttempt() {
   const currentQuestions = questions.slice(startIndex, startIndex + QUESTIONS_PER_PAGE);
 
   const handleOptionChange = (questionId: number, value: string) => {
-    setAnswers((prev) => ({ ...prev, [questionId]: value }));
+    setAnswers((prev) => ({
+      ...prev,
+      [questionId]: value,
+    }));
   };
 
   const goToPage = (page: number) => {
@@ -63,60 +76,66 @@ export default function ExamAttempt() {
 
   const handleSubmitExam = () => {
     if (confirm('Are you sure you want to submit the exam?')) {
+      // In real app → send answers to backend
       console.log('Submitted answers:', answers);
-      router.push(`/`);
+
+      // Redirect to result page
+      router.push(`/student/exams/${examId}/result`);
+      // or show success message + score
     }
   };
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
-        <div className="text-xl font-semibold text-gray-700 animate-pulse">
-          Loading exam questions...
-        </div>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-xl font-medium text-gray-700">Loading exam questions...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 py-6 md:py-10">
-      {/* Fixed Header */}
-      <div className="fixed top-0 left-0 w-full bg-white shadow-md z-50">
-        <div className="container mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
+    <div className="min-h-screen bg-gray-50 py-6 md:py-10">
+      <div className="container mx-auto px-4 md:px-6 max-w-5xl">
+        {/* Header with timer & progress */}
+        <div className="bg-white rounded-xl shadow-md p-5 mb-6 flex flex-col sm:flex-row justify-between items-center gap-4 border border-gray-200">
           <div>
-            <h1 className="text-xl font-bold text-gray-800">Exam ID: {examId}</h1>
-            <p className="text-gray-600 text-sm">
-              Total Questions: {questions.length} | Page {currentPage + 1} of {totalPages}
+            <h1 className="text-2xl font-bold text-gray-800">
+              Exam ID: {examId}
+            </h1>
+            <p className="text-gray-600">
+              Total Questions: {questions.length} • Page {currentPage + 1} of {totalPages}
             </p>
           </div>
-          <div className="text-lg font-mono font-bold text-red-600">
-            ⏱ {formatTime(timeLeft)}
+
+          <div className="text-xl font-bold text-red-600 flex items-center gap-2">
+            <span>Time Left:</span>
+            <span className="font-mono">{formatTime(timeLeft)}</span>
           </div>
         </div>
-        <div className="h-1 bg-green-400 transition-all" style={{ width: `${((60*60 - timeLeft)/(60*60))*100}%` }} />
-      </div>
 
-      <div className="container mx-auto px-4 md:px-6 max-w-5xl mt-32">
-        {/* Questions */}
-        <div className="space-y-6">
+        {/* Questions - 20 per page */}
+        <div className="space-y-8">
           {currentQuestions.map((q) => (
             <div
               key={q.id}
-              className="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg border border-gray-200 transition-transform transform hover:-translate-y-1"
+              className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow transition-shadow"
             >
               <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-lg">
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-lg">
                   {q.id}
                 </div>
                 <div className="flex-1">
-                  <p className="text-gray-800 font-medium mb-4">{q.text}</p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <p className="text-lg font-medium text-gray-800 mb-5 leading-relaxed">
+                    {q.text}
+                  </p>
+
+                  <div className="space-y-3">
                     {q.options.map((option: string, idx: number) => (
                       <label
                         key={idx}
                         className={`flex items-center gap-3 p-4 border rounded-lg cursor-pointer transition-all ${
                           answers[q.id] === option
-                            ? 'border-indigo-500 bg-indigo-50 shadow-inner'
+                            ? 'border-indigo-500 bg-indigo-50'
                             : 'border-gray-200 hover:bg-gray-50'
                         }`}
                       >
@@ -129,7 +148,6 @@ export default function ExamAttempt() {
                           className="w-5 h-5 text-indigo-600 focus:ring-indigo-500"
                         />
                         <span className="text-gray-800">{option}</span>
-                        {answers[q.id] === option && <CheckCircle className="text-green-500 ml-auto" />}
                       </label>
                     ))}
                   </div>
@@ -139,31 +157,35 @@ export default function ExamAttempt() {
           ))}
         </div>
 
-        {/* Pagination & Submit */}
+        {/* Pagination + Submit */}
         <div className="mt-10 flex flex-col sm:flex-row justify-between items-center gap-6">
+          {/* Page navigation */}
           <div className="flex items-center gap-3 flex-wrap">
             <button
               onClick={() => goToPage(currentPage - 1)}
               disabled={currentPage === 0}
               className="px-5 py-2.5 bg-gray-200 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-300 transition"
             >
-              Previous
+              Previous Page
             </button>
-            <span className="text-gray-700 font-medium">
+
+            <div className="text-sm font-medium text-gray-700">
               Page {currentPage + 1} of {totalPages}
-            </span>
+            </div>
+
             <button
               onClick={() => goToPage(currentPage + 1)}
               disabled={currentPage === totalPages - 1}
               className="px-5 py-2.5 bg-gray-200 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-300 transition"
             >
-              Next
+              Next Page
             </button>
           </div>
 
+          {/* Submit button - always visible */}
           <button
             onClick={handleSubmitExam}
-            className="px-10 py-3.5 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg shadow-md transition-all w-full sm:w-auto"
+            className="px-10 py-3.5 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg shadow-md transition-colors w-full sm:w-auto"
           >
             Submit Exam
           </button>

@@ -1,9 +1,7 @@
 'use client';
 
 import { CheckCircle, XCircle, ArrowRight } from 'lucide-react';
-
 export default function MockTestResult({ result }) {
-  // Default data if no props passed
   const data = result || {
     studentName: 'John Doe',
     score: 78,

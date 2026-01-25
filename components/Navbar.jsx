@@ -31,7 +31,7 @@ export default function Navbar() {
           </a>
 
           <Link
-            href="student/MockEntrance/login"
+            href="student/Entrance/login"
             className="hover:text-indigo-600 transition font-semibold"
           >
             Entrance Exam

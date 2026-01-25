@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { Users, FileText, HelpCircle, TrendingUp, Clock } from 'lucide-react'; // optional icons — npm install lucide-react if using
 
 export default function Dashboard() {
-  // Dummy data — replace with real fetches later (e.g. useEffect + API in client component)
   const stats = [
     {
       title: 'Total Students',
